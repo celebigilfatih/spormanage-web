@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Spormanage – Web Tabanlı Spor Yönetim Platformu</title>
+    <meta name="description" content="Spormanage ile spor kulübünüzün üyelerini, finansını ve antrenmanlarını tek panelden yönetin." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page-top-bg" aria-hidden="true"></div>
+    <!-- Header / Navigation -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="#">
+          <img class="logo" src="assets/img/spormanage-logo.png" alt="Spormanage" />
+        </a>
+        <nav class="main-nav" aria-label="Ana menü">
+          <a href="#features">Özellikler</a>
+          <a href="#solutions">Çözümler</a>
+          <a href="#pricing">Fiyatlandırma</a>
+          <a href="#faq">SSS</a>
+        </nav>
+        <div class="header-actions">
+          <a class="btn btn-primary" href="#get-started">Demo Talep</a>
+          <button class="menu-toggle" aria-label="Menüyü aç/kapat">☰</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Entegrasyon Ağı: menünün hemen altında -->
+    <section class="connect" aria-label="Entegrasyonlar ve ekosistem">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="connect-copy">
+              <h1 class="hl-text">Sporun içinden gelen bir ekip olarak, <br>sahadaki disiplini dijital dünyaya taşıyoruz.</h1>
+            </div>
+          </div>
+          <div class="col text-center mt-3">
+            <p class="connect-subtitle">Sporu seven, yazılıma tutkuyla bağlı bir ekibiz. Geliştirdiğimiz uygulamalarla özellikte bir antrenörün, yöneticinin veya velinin işini kolaylaştırmayı hedefliyoruz.</p>
+            <p class="connect-subtitle">Spormanage, kulüplerin, antrenörlerin ve spor okullarının günlük operasyonlarını kolaylaştırmak amacıyla geliştirilmiş, tamamen web tabanlı bir yönetim platformudur.</p>
+            <div class="cta justifty-content-center">
+              <a class="btn btn-primary" href="#signup">Ücretsiz Denemeyi Başlat</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="connect-graph" aria-hidden="false">
+          <!-- SVG icon defs (inline symbol set) -->
+          <svg aria-hidden="true" width="0" height="0" style="position:absolute">
+            <symbol id="ico-user" viewBox="0 0 24 24">
+              <circle cx="12" cy="8" r="4" fill="currentColor"></circle>
+              <path d="M4 20c0-4 4-6 8-6s8 2 8 6" fill="none" stroke="currentColor" stroke-width="2"></path>
+            </symbol>
+            <symbol id="ico-calendar" viewBox="0 0 24 24">
+              <rect x="3" y="5" width="18" height="16" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="2"></rect>
+              <path d="M8 3v4M16 3v4M3 11h18" fill="none" stroke="currentColor" stroke-width="2"></path>
+            </symbol>
+            <symbol id="ico-qr" viewBox="0 0 24 24">
+              <rect x="3" y="3" width="8" height="8" fill="none" stroke="currentColor" stroke-width="2"></rect>
+              <rect x="13" y="3" width="8" height="8" fill="none" stroke="currentColor" stroke-width="2"></rect>
+              <rect x="3" y="13" width="8" height="8" fill="none" stroke="currentColor" stroke-width="2"></rect>
+              <path d="M15 13h6v8h-6M15 17h2M19 17h2" fill="none" stroke="currentColor" stroke-width="2"></path>
+            </symbol>
+            <symbol id="ico-card" viewBox="0 0 24 24">
+              <rect x="2" y="5" width="20" height="14" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="2"></rect>
+              <path d="M2 10h20" fill="none" stroke="currentColor" stroke-width="2"></path>
+            </symbol>
+            <symbol id="ico-chart" viewBox="0 0 24 24">
+              <path d="M3 20h18" stroke="currentColor" stroke-width="2" fill="none"></path>
+              <rect x="5" y="12" width="3" height="6" fill="currentColor"></rect>
+              <rect x="11" y="9" width="3" height="9" fill="currentColor"></rect>
+              <rect x="17" y="6" width="3" height="12" fill="currentColor"></rect>
+            </symbol>
+            <symbol id="ico-mobile" viewBox="0 0 24 24">
+              <rect x="7" y="2" width="10" height="20" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="2"></rect>
+              <circle cx="12" cy="18" r="1" fill="currentColor"></circle>
+            </symbol>
+            <!-- Services section additional icons -->
+            <symbol id="ico-search" viewBox="0 0 24 24">
+              <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"></circle>
+              <path d="M16.5 16.5 L21 21" stroke="currentColor" stroke-width="2" fill="none"></path>
+            </symbol>
+            <symbol id="ico-receipt" viewBox="0 0 24 24">
+              <path d="M5 3h14v18l-3-2-2 2-2-2-2 2-2-2-3 2z" fill="none" stroke="currentColor" stroke-width="2"></path>
+              <path d="M8 7h8M8 11h8M8 15h5" fill="none" stroke="currentColor" stroke-width="2"></path>
+            </symbol>
+          </svg>
+
+          <svg class="connect-svg" viewBox="0 0 1000 420" preserveAspectRatio="none" aria-hidden="true">
+            <!-- Left side with sharp elbows aligned closer to chips -->
+            <path d="M240,90 H320 V210 H500" class="dotted d1"></path>
+            <path d="M240,210 H500" class="dotted d2"></path>
+            <path d="M240,330 H320 V210 H500" class="dotted d3"></path>
+            <!-- Right side mirrored, aligned closer to chips -->
+            <path d="M760,90 H680 V210 H500" class="dotted d1"></path>
+            <path d="M760,210 H500" class="dotted d2"></path>
+            <path d="M760,330 H680 V210 H500" class="dotted d3"></path>
+          </svg>
+
+          <div class="chip chip-left top"><svg class="ico" viewBox="0 0 24 24"><use href="#ico-user"/></svg>Üye Yönetimi</div>
+          <div class="chip chip-left mid"><svg class="ico" viewBox="0 0 24 24"><use href="#ico-calendar"/></svg>Antrenman Planlama</div>
+          <div class="chip chip-left bottom"><svg class="ico" viewBox="0 0 24 24"><use href="#ico-qr"/></svg>Yoklama (QR)</div>
+
+          <div class="center-logo"><img src="assets/img/logo-favicon-1.webp " alt="Spormanage logo" /></div>
+
+          <div class="chip chip-right top"><svg class="ico" viewBox="0 0 24 24"><use href="#ico-card"/></svg>Finans & Tahsilat</div>
+          <div class="chip chip-right mid"><svg class="ico" viewBox="0 0 24 24"><use href="#ico-chart"/></svg>Raporlama & Analitik</div>
+          <div class="chip chip-right bottom"><svg class="ico" viewBox="0 0 24 24"><use href="#ico-mobile"/></svg>Mobil PWA</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services: Slider (hero) altı üçlü kartlar -->
+    <section id="services" class="section services">
+      <div class="container">
+        <div class="row justify-content-center align-items-center">
+          <div class="col-12 text-center">
+            <div class="crumb"><span class="dot">⬤</span> Hizmetlerimiz / Ürünlerimiz</div>
+            <h2 class="section-title">Webmahsul, spor dünyasına özel 4 ana yazılım çözümü sunar:</h2>
+            <p class="section-subtitle">Kulüpler, antrenörler ve organizatörler için uçtan uca dijital yönetim.</p>
+          </div>
+        </div>
+
+        <div class="row g-4 svc-grid">
+          <div class="col-12 col-md-4">
+            <article class="svc-card h-100">
+              <div class="svc-icon"><svg class="ico" viewBox="0 0 24 24"><use href="#ico-search"/></svg></div>
+              <h3>Spor Kulüpleri CMS</h3>
+              <p>Kulüp web sitesi, içerik, etkinlik ve medya yönetimi; SEO ve çoklu dil desteği.</p>
+            </article>
+          </div>
+          <div class="col-12 col-md-4">
+            <article class="svc-card h-100">
+              <div class="svc-icon"><svg class="ico" viewBox="0 0 24 24"><use href="#ico-receipt"/></svg></div>
+              <h3>Aidat & Antrenman Takip Sistemi</h3>
+              <p>Ödeme takibi, yoklama, antrenman planı, veli portalı ve ayrıntılı raporlar.</p>
+            </article>
+          </div>
+          <div class="col-12 col-md-4">
+            <article class="svc-card h-100">
+              <div class="svc-icon"><svg class="ico" viewBox="0 0 24 24"><use href="#ico-chart"/></svg></div>
+              <h3>NextGeneration Coaching System</h3>
+              <p>Antrenörler için planlama, hazır driller,performans analizi, veri görselleştirme ve takım yönetimi.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Hero -->
+    <section class="hero" id="get-started">
+      <div class="container hero-inner">
+        <div class="hero-content">
+          <h1>Web tabanlı, modüler ve güçlü spor yönetimi</h1>
+          <p class="subtitle">
+            Kulübünüzü tek bir yerden yönetin: üye takibi, finans, antrenman planları ve analitik. Güvenli, hızlı ve esnek.
+          </p>
+          <div class="cta">
+            <a class="btn btn-primary btn-lg" href="#signup">Hemen Başla</a>
+            <a class="btn btn-ghost btn-lg" href="#demo">Canlı Demo Gör</a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat">
+              <div class="value">20k+</div>
+              <div class="label">Aktif sporcu kaydı</div>
+            </div>
+            <div class="stat">
+              <div class="value">200+</div>
+              <div class="label">Kulüp ve akademi</div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-card">
+          <div class="panel">
+            <div class="panel-head">
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
+            </div>
+            <div class="panel-body">
+              <div class="panel-title">Kontrol Paneli</div>
+              <div class="panel-grid">
+                <div class="mini-card">
+                  <div class="mini-title">Üyeler</div>
+                  <div class="mini-value">1.245</div>
+                </div>
+                <div class="mini-card">
+                  <div class="mini-title">Tahsilatlar</div>
+                  <div class="mini-value">₺ 92.400</div>
+                </div>
+                <div class="mini-card">
+                  <div class="mini-title">Antrenmanlar</div>
+                  <div class="mini-value">48</div>
+                </div>
+                <div class="mini-card">
+                  <div class="mini-title">Katılım</div>
+                  <div class="mini-value">92%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features" class="section features">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-12 text-center">
+            <h2 class="section-title">Modüler ve gelişmiş özellikler</h2>
+            <p class="section-subtitle">Kulübünüzün tüm operasyonlarını tek bir panelden yönetin.</p>
+          </div>
+        </div>
+        <div class="row g-3">
+          <div class="col-12 col-md-4">
+            <article class="card h-100">
+              <div class="card-icon" aria-hidden="true">🏅</div>
+              <h3>Üye ve Sporcu Yönetimi</h3>
+              <p>Detaylı profil, kategori ve branş bazlı takip. Katılım, sağlık ve izin kayıtları.</p>
+            </article>
+          </div>
+          <div class="col-12 col-md-4">
+            <article class="card h-100">
+              <div class="card-icon" aria-hidden="true">💳</div>
+              <h3>Finans ve Tahsilat</h3>
+              <p>Otomatik aidat, online ödeme bağlantıları ve gecikme uyarıları. Gelir-gider analizi.</p>
+            </article>
+          </div>
+          <div class="col-12 col-md-4">
+            <article class="card h-100">
+              <div class="card-icon" aria-hidden="true">📈</div>
+              <h3>Analitik ve Raporlama</h3>
+              <p>Gerçek zamanlı dashboard, büyüme metrikleri ve özelleştirilebilir rapor şablonları.</p>
+            </article>
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col-12">
+            <div class="integrations">
+              <span>Stripe</span>
+              <span>Mailgun</span>
+              <span>Google Sheets</span>
+              <span>Zapier</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Solutions / Highlight -->
+    <section id="solutions" class="section highlight">
+      <div class="container highlight-inner">
+        <div class="highlight-copy">
+          <h2>Antrenman planları ve yoklama tek ekranda</h2>
+          <p>Seans oluşturun, katılımı anlık işaretleyin ve performansı karşılaştırın. Mobil uyumlu arayüzle antrenörler için daha hızlı işlem.</p>
+          <ul class="list">
+            <li>Drag & drop haftalık planlama</li>
+            <li>QR ile hızlı yoklama</li>
+            <li>Branş bazlı performans kartları</li>
+          </ul>
+          <a class="btn btn-primary" href="https://portal.spormanage.com.tr/">Örneği Gör</a>
+        </div>
+        <div class="highlight-visual">
+          <div class="screen">
+            <div class="screen-head">
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
+            </div>
+            <div class="screen-body">
+              <div class="timeline">
+                <div class="slot active">Pzt 18:00 – Kondisyon</div>
+                <div class="slot">Sal 18:00 – Teknik</div>
+                <div class="slot">Çar 18:00 – Taktik</div>
+                <div class="slot">Per 18:00 – Güç</div>
+                <div class="slot">Cum 18:00 – Maç</div>
+              </div>
+              <div class="attendance">
+                <div class="att-card">
+                  <div class="att-title">U15 – Katılım</div>
+                  <div class="att-value">92%</div>
+                </div>
+                <div class="att-card">
+                  <div class="att-title">U17 – Katılım</div>
+                  <div class="att-value">88%</div>
+                </div>
+                <div class="att-card">
+                  <div class="att-title">A Takım – Katılım</div>
+                  <div class="att-value">95%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- FAQ -->
+    <section id="faq" class="section faq">
+      <div class="container">
+        <h2>Sık sorulan sorular</h2>
+        <div class="faq-list">
+          <details>
+            <summary>Ödemeler nasıl alınır?</summary>
+            <p>Stripe entegrasyonu ile online ödeme bağlantısı oluşturabilir, nakit ve havale kayıtlarını panelden işleyebilirsiniz.</p>
+          </details>
+          <details>
+            <summary>Verilerim güvende mi?</summary>
+            <p>Verileriniz şifrelenir, yedeklenir ve erişim denetimleri ile korunur. GDPR uyumluluğu sağlanır.</p>
+          </details>
+          <details>
+            <summary>Mobil uygulama var mı?</summary>
+            <p>PWA tabanlı mobil deneyim sunuyoruz; tüm ekranlara uyumlu ve offline desteklidir.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing (basit vitrin) -->
+    <section id="pricing" class="section pricing">
+      <div class="container">
+        <h2>Basit ve şeffaf fiyatlandırma</h2>
+        <div class="grid grid-3">
+          <div class="price-card">
+            <div class="price-title">Başlangıç</div>
+            <div class="price-value">₺0</div>
+            <ul class="price-features">
+              <li>100 sporcu</li>
+              <li>Temel raporlar</li>
+              <li>Topluluk desteği</li>
+            </ul>
+            <a class="btn btn-outline" href="#">Denemeye Başla</a>
+          </div>
+          <div class="price-card emphasized">
+            <div class="badge">Popüler</div>
+            <div class="price-title">Pro</div>
+            <div class="price-value">₺299/ay</div>
+            <ul class="price-features">
+              <li>Sınırsız sporcu</li>
+              <li>Online tahsilat</li>
+              <li>Gelişmiş analitik</li>
+            </ul>
+            <a class="btn btn-primary" href="#">Satın Al</a>
+          </div>
+          <div class="price-card">
+            <div class="price-title">Kurumsal</div>
+            <div class="price-value">Özel</div>
+            <ul class="price-features">
+              <li>SSO ve SLA</li>
+              <li>Özel raporlar</li>
+              <li>Atanan başarı yöneticisi</li>
+            </ul>
+            <a class="btn btn-outline" href="#">İletişime Geç</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="footer-bg" aria-hidden="true"></div>
+      <div class="container footer-inner">
+        <div class="footer-brand">
+          <img class="logo" src="assets/img/spormanage-logo.png" alt="Spormanage" />
+          <div>Spormanage</div>
+          <div class="muted">Spor kulüpleri için modern yönetim platformu.</div>
+        </div>
+        <div class="footer-cols">
+          <div class="col">
+            <div class="col-title">Ürün</div>
+            <a href="#features">Özellikler</a>
+            <a href="#pricing">Fiyatlandırma</a>
+            <a href="#demo">Demo</a>
+          </div>
+          <div class="col">
+            <div class="col-title">Kaynaklar</div>
+            <a href="#blog">Blog</a>
+            <a href="#faq">SSS</a>
+            <a href="#">Doküman</a>
+          </div>
+          <div class="col">
+            <div class="col-title">Şirket</div>
+            <a href="#">Hakkımızda</a>
+            <a href="#">İletişim</a>
+            <a href="#">Gizlilik</a>
+          </div>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <div>© 2025 Spormanage</div>
+        <div class="muted">Tüm hakları saklıdır.</div>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+  </html>
