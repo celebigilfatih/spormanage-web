@@ -254,11 +254,14 @@ a { color: inherit; text-decoration: none; }
 }
 
 @media (max-width: 760px) {
-  .section { padding: 100px 0; }
+  .section { padding: 80px 0; }
   .services-title { font-size: 26px; }
   .svc-grid { grid-template-columns: 1fr; }
   .connect-graph { height: 320px; }
   .connect-subtitle { width: 100%; }
+  /* Reduce vertical spacing for Connect on mobile */
+  .connect { padding: 60px 0; }
+  .connect-copy { padding-top: 20px; }
   /* Connect: switch to stacked chips on mobile */
   .connect-svg { display: none; }
   .connect-graph { height: auto; padding-top: 8px; }
