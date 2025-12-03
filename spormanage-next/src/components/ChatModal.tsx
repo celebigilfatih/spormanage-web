@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, FormEvent, useState } from "react";
 
-export default function ChatModal({ open, onClose }: { open: boolean; onClose: () => void }) {
+export default function ChatModal({ open, onClose, prefillMessage }: { open: boolean; onClose: () => void; prefillMessage?: string }) {
   useEffect(() => {
     if (open) {
       setTimeout(() => {
@@ -10,13 +10,24 @@ export default function ChatModal({ open, onClose }: { open: boolean; onClose: (
     }
   }, [open]);
 
+  useEffect(() => {
+    if (open && prefillMessage) {
+      setStep(2);
+      setShowErrors2(false);
+      setTimeout(() => {
+        const ta = document.querySelector<HTMLTextAreaElement>("#chat-modal #chat-message");
+        if (ta) { ta.value = prefillMessage; ta.focus(); }
+      }, 10);
+    }
+  }, [open, prefillMessage]);
+
   const [status, setStatus] = useState<string>("");
   const [statusKind, setStatusKind] = useState<"" | "success" | "error">("");
   const [step, setStep] = useState<1 | 2>(1);
   const [closing, setClosing] = useState(false);
   const [showErrors1, setShowErrors1] = useState(false);
   const [showErrors2, setShowErrors2] = useState(false);
-  const handleClose = () => { setClosing(true); setTimeout(() => { setClosing(false); onClose(); }, 180); };
+  const handleClose = () => { setClosing(true); setTimeout(() => { setClosing(false); onClose(); }, 200); };
   const normalizePhone = (s: string) => {
     let v = s.replace(/[^\d+]/g, "");
     if (v.includes("+") && !v.startsWith("+")) v = v.replace(/\+/g, "");
@@ -27,10 +38,11 @@ export default function ChatModal({ open, onClose }: { open: boolean; onClose: (
     const form = e.currentTarget;
     const fd = new FormData(form);
     const message = (fd.get("message") || "").toString().trim();
+    const org = (fd.get("org") || "").toString().trim();
     const name = (fd.get("name") || "").toString().trim();
     const phone = normalizePhone((fd.get("phone") || "").toString().trim());
     const email = (fd.get("email") || "").toString().trim();
-    if (!name || !phone || !email) {
+    if (!org || !name || !phone || !email) {
       setShowErrors1(true);
       setStep(1);
       const f = document.querySelector<HTMLFormElement>("#chat-modal form.chat-form");
@@ -50,7 +62,7 @@ export default function ChatModal({ open, onClose }: { open: boolean; onClose: (
       const res = await fetch("/api/telegram/send", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message, name, phone, email, ua: navigator.userAgent, url: location.href, ts: Date.now() }),
+        body: JSON.stringify({ message, org, name, phone, email, ua: navigator.userAgent, url: location.href, ts: Date.now() }),
       });
       if (!res.ok) throw new Error("fail");
       setStatus("Mesajınız alındı.");
@@ -67,10 +79,11 @@ export default function ChatModal({ open, onClose }: { open: boolean; onClose: (
   };
 
   const handleNext = () => {
+    const org = (document.getElementById("chat-org") as HTMLInputElement)?.value.trim();
     const name = (document.getElementById("chat-name") as HTMLInputElement)?.value.trim();
     const phone = (document.getElementById("chat-phone") as HTMLInputElement)?.value.trim();
     const email = (document.getElementById("chat-email") as HTMLInputElement)?.value.trim();
-    if (!name || !phone || !email) {
+    if (!org || !name || !phone || !email) {
       setShowErrors1(true);
       const f = document.querySelector<HTMLFormElement>("#chat-modal form.chat-form");
       f?.reportValidity();
@@ -128,10 +141,18 @@ export default function ChatModal({ open, onClose }: { open: boolean; onClose: (
             <div className={`step-wrap ${showErrors1 ? 'show-errors-1' : ''}`}>
               <div className="chat-fields">
                 <div className="field">
+                  <label className="chat-label" htmlFor="chat-org">Kulüp/Kurum Adı</label>
+                  <div className="control">
+                    <span className="ico"><svg viewBox="0 0 24 24"><path d="M3 4h18v16H3V4Zm2 2v12h14V6H5Zm2 2h10v2H7V8Zm0 4h10v2H7v-2Z"/></svg></span>
+                    <input id="chat-org" type="text" className="chat-name" name="org" required autoComplete="organization" />
+                  </div>
+                  <small className="error">Bu alan zorunlu</small>
+                </div>
+                <div className="field">
                   <label className="chat-label" htmlFor="chat-name">Ad Soyad</label>
                   <div className="control">
                     <span className="ico"><svg viewBox="0 0 24 24"><path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2c-4 0-7 3-7 7h2c0-2.76 2.24-5 5-5s5 2.24 5 5h2c0-4-3-7-7-7Z"/></svg></span>
-                    <input id="chat-name" type="text" className="chat-name" name="name" required autoComplete="name" placeholder="Ad Soyad" />
+                    <input id="chat-name" type="text" className="chat-name" name="name" required autoComplete="name" />
                   </div>
                   <small className="error">Bu alan zorunlu</small>
                 </div>
@@ -139,7 +160,7 @@ export default function ChatModal({ open, onClose }: { open: boolean; onClose: (
                   <label className="chat-label" htmlFor="chat-phone">Telefon</label>
                   <div className="control">
                     <span className="ico"><svg viewBox="0 0 24 24"><path d="M6 2h4l2 5-2 2c1 3 3 5 6 6l2-2 5 2v4C16 19 5 8 6 2Z"/></svg></span>
-                    <input id="chat-phone" type="tel" className="chat-phone" name="phone" required inputMode="tel" pattern="^\+?[1-9]\d{7,14}$" title="Uluslararası format: +ülkeKodu numara" placeholder="+90 5xx xxx xx xx" />
+                    <input id="chat-phone" type="tel" className="chat-phone" name="phone" required inputMode="tel" pattern="^\+?[1-9]\d{7,14}$" title="Uluslararası format: +ülkeKodu numara" />
                   </div>
                   <small className="error">Format: +ülkeKodu numara</small>
                 </div>
@@ -147,7 +168,7 @@ export default function ChatModal({ open, onClose }: { open: boolean; onClose: (
                   <label className="chat-label" htmlFor="chat-email">E-posta</label>
                   <div className="control">
                     <span className="ico"><svg viewBox="0 0 24 24"><path d="M2 4h20v16H2V4Zm2 2v12h16V6l-8 5-8-5Z"/></svg></span>
-                    <input id="chat-email" type="email" className="chat-email" name="email" required autoComplete="email" placeholder="ornek@mail.com" />
+                    <input id="chat-email" type="email" className="chat-email" name="email" required autoComplete="email" />
                   </div>
                   <small className="error">Geçerli e‑posta girin</small>
                 </div>

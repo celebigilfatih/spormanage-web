@@ -6,11 +6,12 @@ export async function POST(req: Request) {
     if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) {
       return NextResponse.json({ error: "missing env" }, { status: 500 });
     }
-    const body = await req.json();
-    const message: string = body?.message || "";
-    const name: string = body?.name || "";
-    const phone: string = body?.phone || "";
-    const email: string = body?.email || "";
+  const body = await req.json();
+  const message: string = body?.message || "";
+  const org: string = body?.org || "";
+  const name: string = body?.name || "";
+  const phone: string = body?.phone || "";
+  const email: string = body?.email || "";
     const ua: string = body?.ua || "";
     const url: string = body?.url || "";
     const ts = body?.ts;
@@ -18,17 +19,18 @@ export async function POST(req: Request) {
     const time = dt.toLocaleString("tr-TR", { year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false });
     let page = url;
     try { const u = new URL(url); page = u.pathname || url; } catch {}
-    if (!message) return NextResponse.json({ error: "message required" }, { status: 400 });
-    const text = [
-      `SporManage Asistan • ${time}`,
-      `Kaynak: ${page}`,
-      "",
-      `✍️ Mesaj: ${message}`,
-      `👤 İsim: ${name}`,
-      `📞 Telefon: ${phone}`,
-      `📧 E-posta: ${email}`,
-      `🌐 URL: ${url}`,
-      `🖥️ UA: ${ua}`,
+  if (!message) return NextResponse.json({ error: "message required" }, { status: 400 });
+  const text = [
+    `SporManage Asistan • ${time}`,
+    `Kaynak: ${page}`,
+    "",
+    `✍️ Mesaj: ${message}`,
+    `🏟️ Kulüp/Kurum: ${org}`,
+    `👤 İsim: ${name}`,
+    `📞 Telefon: ${phone}`,
+    `📧 E-posta: ${email}`,
+    `🌐 URL: ${url}`,
+    `🖥️ UA: ${ua}`,
       `⏱️ TS: ${ts}`,
     ].join("\n");
 
@@ -42,7 +44,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "telegram_error", details: txt }, { status: 500 });
     }
     return NextResponse.json({ ok: true });
-  } catch (e) {
+  } catch {
     return NextResponse.json({ error: "internal" }, { status: 500 });
   }
 }

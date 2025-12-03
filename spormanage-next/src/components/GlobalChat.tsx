@@ -5,9 +5,17 @@ import AssistantFab from "@/components/AssistantFab";
 
 export default function GlobalChat() {
   const [open, setOpen] = useState(false);
+  const [prefillMessage, setPrefillMessage] = useState<string | undefined>(undefined);
 
   useEffect(() => {
-    const onOpen = () => setOpen(true);
+    const onOpen = (e: Event) => {
+      try {
+        const ce = e as CustomEvent<{ message?: string }>;
+        const msg = ce?.detail?.message;
+        if (msg) setPrefillMessage(msg);
+      } catch {}
+      setOpen(true);
+    };
     const onKey = (e: KeyboardEvent) => {
       const mod = e.metaKey || e.ctrlKey;
       if (mod && e.key.toLowerCase() === "k") {
@@ -31,9 +39,8 @@ export default function GlobalChat() {
 
   return (
     <>
-      <ChatModal open={open} onClose={() => setOpen(false)} />
+      <ChatModal open={open} onClose={() => { setOpen(false); setPrefillMessage(undefined); }} prefillMessage={prefillMessage} />
       <AssistantFab onClick={() => setOpen(true)} />
     </>
   );
 }
-

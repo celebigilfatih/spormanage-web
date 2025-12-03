@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+export const runtime = "nodejs";
 import path from "node:path";
 import fs from "node:fs/promises";
 
@@ -10,12 +11,14 @@ const MIME: Record<string, string> = {
   ".svg": "image/svg+xml",
 };
 
-export async function GET(_req: Request, { params }: { params: { path: string[] } }) {
+export async function GET(_req: Request, ctx: { params: Promise<{ path: string[] }> }) {
   try {
-    const segments = params.path || [];
+    const p = await ctx.params;
+    const segments = p.path || [];
+    console.log("assets route segments:", segments);
     const rel = segments.join("/");
     if (rel.includes("..")) return NextResponse.json({ error: "invalid path" }, { status: 400 });
-    const filePath = path.join(process.cwd(), "..", "assets", "img", rel);
+    const filePath = path.join(process.cwd(), "..", "assets", rel);
     const ext = path.extname(filePath).toLowerCase();
     const type = MIME[ext] || "application/octet-stream";
     const buf = await fs.readFile(filePath);
