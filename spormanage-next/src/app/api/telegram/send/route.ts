@@ -1,4 +1,6 @@
 import { NextResponse } from "next/server";
+export const runtime = "nodejs";
+const RATE = new Map<string, number>();
 
 export async function POST(req: Request) {
   try {
@@ -15,6 +17,18 @@ export async function POST(req: Request) {
     const ua: string = body?.ua || "";
     const url: string = body?.url || "";
     const ts = body?.ts;
+    const hp: string = body?.hp || "";
+    if (hp && hp.trim().length > 0) return NextResponse.json({ error: "spam" }, { status: 400 });
+    if (!email.includes("@") || !email.includes(".")) return NextResponse.json({ error: "invalid_email" }, { status: 400 });
+    if (message.trim().length < 5 || message.length > 2000) return NextResponse.json({ error: "invalid_message" }, { status: 400 });
+    if (org.trim().length < 2 || name.trim().length < 2) return NextResponse.json({ error: "invalid_identity" }, { status: 400 });
+    if (!/^\+?[0-9]{7,}$/.test(phone)) return NextResponse.json({ error: "invalid_phone" }, { status: 400 });
+    const ip = req.headers.get("x-forwarded-for")?.split(",")[0] || req.headers.get("x-real-ip") || "";
+    const key = `${ip}|${ua}`;
+    const now = Date.now();
+    const last = RATE.get(key) || 0;
+    if (now - last < 2000) { RATE.set(key, now); return NextResponse.json({ error: "rate_limited" }, { status: 429 }); }
+    RATE.set(key, now);
     const dt = new Date(typeof ts === "number" ? ts : Date.now());
     const time = dt.toLocaleString("tr-TR", { year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false });
     let page = url;

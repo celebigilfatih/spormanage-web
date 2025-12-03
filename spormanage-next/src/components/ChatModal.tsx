@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, FormEvent, useState } from "react";
+import { useEffect, FormEvent, useState, useCallback } from "react";
 
 export default function ChatModal({ open, onClose, prefillMessage }: { open: boolean; onClose: () => void; prefillMessage?: string }) {
   useEffect(() => {
@@ -27,7 +27,38 @@ export default function ChatModal({ open, onClose, prefillMessage }: { open: boo
   const [closing, setClosing] = useState(false);
   const [showErrors1, setShowErrors1] = useState(false);
   const [showErrors2, setShowErrors2] = useState(false);
-  const handleClose = () => { setClosing(true); setTimeout(() => { setClosing(false); onClose(); }, 200); };
+  const [needBack, setNeedBack] = useState(false);
+  const [orgVal, setOrgVal] = useState("");
+  const [nameVal, setNameVal] = useState("");
+  const [phoneVal, setPhoneVal] = useState("");
+  const [emailVal, setEmailVal] = useState("");
+  const [closeCountdown, setCloseCountdown] = useState<number | null>(null);
+  const [successView, setSuccessView] = useState(false);
+  const handleClose = useCallback(() => { setClosing(true); setTimeout(() => { setClosing(false); onClose(); }, 200); }, [onClose]);
+
+  useEffect(() => {
+    if (open) {
+      setSuccessView(false);
+      setCloseCountdown(null);
+      setStatus("");
+      setStatusKind("");
+    }
+  }, [open]);
+  useEffect(() => {
+    if (open && statusKind === "success" && closeCountdown !== null) {
+      if (closeCountdown <= 0) {
+        handleClose();
+        setStatus("");
+        setStatusKind("");
+        setCloseCountdown(null);
+        return;
+      }
+      const t = setTimeout(() => {
+        setCloseCountdown((n) => (typeof n === "number" ? n - 1 : null));
+      }, 1000);
+      return () => clearTimeout(t);
+    }
+  }, [open, statusKind, closeCountdown, handleClose]);
   const normalizePhone = (s: string) => {
     let v = s.replace(/[^\d+]/g, "");
     if (v.includes("+") && !v.startsWith("+")) v = v.replace(/\+/g, "");
@@ -38,26 +69,27 @@ export default function ChatModal({ open, onClose, prefillMessage }: { open: boo
     const form = e.currentTarget;
     const fd = new FormData(form);
     const message = (fd.get("message") || "").toString().trim();
-    const org = (fd.get("org") || "").toString().trim();
-    const name = (fd.get("name") || "").toString().trim();
-    const phone = normalizePhone((fd.get("phone") || "").toString().trim());
-    const email = (fd.get("email") || "").toString().trim();
+    const org = orgVal.trim();
+    const name = nameVal.trim();
+    const phone = normalizePhone(phoneVal.trim());
+    const email = emailVal.trim();
     if (!org || !name || !phone || !email) {
       setShowErrors1(true);
-      setStep(1);
-      const f = document.querySelector<HTMLFormElement>("#chat-modal form.chat-form");
-      f?.reportValidity();
+      setNeedBack(true);
+      setStatus("İletişim bilgileri eksik. Lütfen doldurun.");
+      setStatusKind("error");
       return;
     }
     if (!message) {
       setShowErrors2(true);
-      setStep(2);
-      const f = document.querySelector<HTMLFormElement>("#chat-modal form.chat-form");
-      f?.reportValidity();
+      setNeedBack(false);
+      setStatus("Mesaj alanı zorunlu.");
+      setStatusKind("error");
       return;
     }
     setStatus("Gönderiliyor…");
     setStatusKind("");
+    setNeedBack(false);
     try {
       const res = await fetch("/api/telegram/send", {
         method: "POST",
@@ -65,13 +97,15 @@ export default function ChatModal({ open, onClose, prefillMessage }: { open: boo
         body: JSON.stringify({ message, org, name, phone, email, ua: navigator.userAgent, url: location.href, ts: Date.now() }),
       });
       if (!res.ok) throw new Error("fail");
-      setStatus("Mesajınız alındı.");
-      setStatusKind("success");
       (form as HTMLFormElement).reset();
       setStep(1);
       setShowErrors1(false);
       setShowErrors2(false);
-      setTimeout(() => { handleClose(); setStatus(""); setStatusKind(""); }, 1200);
+      setNeedBack(false);
+      setSuccessView(true);
+      setStatus("Teşekkür ederiz! Mesajınız bize ulaştı.");
+      setStatusKind("success");
+      setCloseCountdown(6);
     } catch {
       setStatus("Gönderimde bir sorun oluştu. Lütfen tekrar deneyin.");
       setStatusKind("error");
@@ -89,6 +123,10 @@ export default function ChatModal({ open, onClose, prefillMessage }: { open: boo
       f?.reportValidity();
       return;
     }
+    setOrgVal(org);
+    setNameVal(name);
+    setPhoneVal(phone);
+    setEmailVal(email);
     setStep(2);
     setShowErrors2(false);
     setTimeout(() => {
@@ -111,6 +149,12 @@ export default function ChatModal({ open, onClose, prefillMessage }: { open: boo
           </div>
         </div>
         <div className="chat-greet">Size nasıl yardımcı olabilirim?</div>
+        {successView && (
+          <div className="chat success-view" aria-live="polite">
+            <div className="bubble ai">Talebiniz alındı, size en kısa zamanda dönüş yapacağız.</div>
+            <div className="bubble ai">Teşekkür ederiz!</div>
+          </div>
+        )}
         {step === 2 && (
         <div className="chips">
           <button type="button" className="chip-opt" onClick={() => {
@@ -136,6 +180,7 @@ export default function ChatModal({ open, onClose, prefillMessage }: { open: boo
           }}>Destek talebi oluştur</button>
         </div>
         )}
+        {!successView && (
         <form className="chat-form" onSubmit={sendMessage}>
           {step === 1 && (
             <div className={`step-wrap ${showErrors1 ? 'show-errors-1' : ''}`}>
@@ -160,9 +205,9 @@ export default function ChatModal({ open, onClose, prefillMessage }: { open: boo
                   <label className="chat-label" htmlFor="chat-phone">Telefon</label>
                   <div className="control">
                     <span className="ico"><svg viewBox="0 0 24 24"><path d="M6 2h4l2 5-2 2c1 3 3 5 6 6l2-2 5 2v4C16 19 5 8 6 2Z"/></svg></span>
-                    <input id="chat-phone" type="tel" className="chat-phone" name="phone" required inputMode="tel" pattern="^\+?[1-9]\d{7,14}$" title="Uluslararası format: +ülkeKodu numara" />
+                    <input id="chat-phone" type="tel" className="chat-phone" name="phone" required inputMode="tel" pattern="^(\+?[1-9]\d{7,14}|0\d{10})$" title="Uluslararası (+90...) veya yerel (0XXXXXXXXXX)" />
                   </div>
-                  <small className="error">Format: +ülkeKodu numara</small>
+                  <small className="error">Format: +ülkeKodu numara veya 0XXXXXXXXXX</small>
                 </div>
                 <div className="field">
                   <label className="chat-label" htmlFor="chat-email">E-posta</label>
@@ -181,6 +226,11 @@ export default function ChatModal({ open, onClose, prefillMessage }: { open: boo
               <div className="field">
                 <label className="chat-label" htmlFor="chat-message">Mesaj</label>
                 <div className="control">
+                  <input type="hidden" name="org" value={orgVal} />
+                  <input type="hidden" name="name" value={nameVal} />
+                  <input type="hidden" name="phone" value={phoneVal} />
+                  <input type="hidden" name="email" value={emailVal} />
+                  <input type="text" name="hp" className="hp-field" />
                   <textarea id="chat-message" className="chat-input" name="message" required rows={6} />
                 </div>
                 <small className="error">Bu alan zorunlu</small>
@@ -189,14 +239,23 @@ export default function ChatModal({ open, onClose, prefillMessage }: { open: boo
             </div>
           )}
         </form>
+        )}
         {status && (
           <div className={`chat-status ${statusKind}`}>
-            <span>{status}</span>
+            <span>{status}{statusKind === "success" && closeCountdown !== null ? ` — Pencere ${closeCountdown}s içinde kapanacak` : ""}</span>
+            {statusKind === "success" && (
+              <button type="button" className="btn btn-primary" onClick={handleClose}>Şimdi Kapat</button>
+            )}
             {statusKind === "error" && (
-              <button type="button" className="btn btn-outline retry" onClick={() => {
-                const f = document.querySelector<HTMLFormElement>("#chat-modal form.chat-form");
-                f?.requestSubmit();
-              }}>Yeniden Dene</button>
+              <>
+                {needBack && (
+                  <button type="button" className="btn btn-outline retry" onClick={() => setStep(1)}>Geri</button>
+                )}
+                <button type="button" className="btn btn-outline retry" onClick={() => {
+                  const f = document.querySelector<HTMLFormElement>("#chat-modal form.chat-form");
+                  f?.requestSubmit();
+                }}>Yeniden Dene</button>
+              </>
             )}
           </div>
         )}

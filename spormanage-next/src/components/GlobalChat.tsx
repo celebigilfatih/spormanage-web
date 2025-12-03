@@ -6,6 +6,7 @@ import AssistantFab from "@/components/AssistantFab";
 export default function GlobalChat() {
   const [open, setOpen] = useState(false);
   const [prefillMessage, setPrefillMessage] = useState<string | undefined>(undefined);
+  const [toastOpen, setToastOpen] = useState(false);
 
   useEffect(() => {
     const onOpen = (e: Event) => {
@@ -37,8 +38,18 @@ export default function GlobalChat() {
     document.body.classList.toggle("chat-open", open);
   }, [open]);
 
+  useEffect(() => {
+    const onSuccess = () => {
+      setToastOpen(true);
+      setTimeout(() => setToastOpen(false), 4000);
+    };
+    window.addEventListener("chat-success", onSuccess as EventListener);
+    return () => window.removeEventListener("chat-success", onSuccess as EventListener);
+  }, []);
+
   return (
     <>
+      <div className={`toast toast-success ${toastOpen ? 'show' : ''}`}>Mesajınız alındı, teşekkürler!</div>
       <ChatModal open={open} onClose={() => { setOpen(false); setPrefillMessage(undefined); }} prefillMessage={prefillMessage} />
       <AssistantFab onClick={() => setOpen(true)} />
     </>

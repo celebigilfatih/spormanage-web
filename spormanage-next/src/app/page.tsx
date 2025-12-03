@@ -98,9 +98,10 @@ export default function Home() {
           </a>
           <nav className={`main-nav ${navOpen ? "open" : ""}`} aria-label="Ana menü">
             <a href="#services">Hizmetler</a>
-            <a href="#get-started">Çözümler</a>
+            <a href="#solutions">Çözümler</a>
+            <a href="#references">Referanslar</a>
             <a href="#pricing">Fiyatlandırma</a>
-            <a href="/contact">İletişim</a>
+            <a href="#contact-inline">İletişim</a>
           </nav>
           <div className="header-actions">
             <button className="btn btn-primary" onClick={() => {
@@ -116,11 +117,11 @@ export default function Home() {
         <div className="container hero-inner single">
           <div className="hero-content text-center">
             <h1>Sporun içinden gelen bir ekip olarak, sahadaki disiplini dijital dünyaya taşıyoruz.</h1>
-            <p className="subtitle">Sporu seven, yazılıma tutkuyla bağlı bir ekibiz. Geliştirdiğimiz uygulamalarla özellikle bir antrenörün, yöneticinin veya velinin işini kolaylaştırmayı hedefliyoruz.</p>
-            <p className="subtitle">Spormanage, kulüplerin, antrenörlerin ve spor okullarının günlük operasyonlarını kolaylaştırmak amacıyla geliştirilmiş, tamamen web tabanlı bir yönetim platformudur.</p>
+            <p className="subtitle text-center">Sporu seven, yazılıma tutkuyla bağlı bir ekibiz. Geliştirdiğimiz uygulamalarla özellikle bir antrenörün, yöneticinin veya velinin işini kolaylaştırmayı hedefliyoruz.</p>
+            <p className="subtitle text-center">Spormanage, kulüplerin, antrenörlerin ve spor okullarının günlük operasyonlarını kolaylaştırmak amacıyla geliştirilmiş, tamamen web tabanlı bir yönetim platformudur.</p>
           </div>
         </div>
-        <div className="connect">
+        <div className="connect" id="solutions">
           <div className="container">
             <div className="connect-graph" ref={connectRef}>
               <svg aria-hidden="true" width="0" height="0" style={{ position: "absolute" }}>
@@ -177,6 +178,36 @@ export default function Home() {
               <div className="chip chip-right mid"><svg className="ico" viewBox="0 0 24 24"><use href="#ico-chart"/></svg>Raporlama & Analitik</div>
               <div className="chip chip-right bottom"><svg className="ico" viewBox="0 0 24 24"><use href="#ico-mobile"/></svg>Mobil PWA</div>
             </div>
+          </div>
+        </div>
+      </section>
+      
+      <section className="section references" id="references">
+        <div className="container">
+          <div className="row justify-content-center align-items-center">
+            <div className="col-12 text-center">
+              <div className="crumb"><span className="dot">⬤</span> Referanslar</div>
+              <h2 className="section-title">Birlikte çalıştığımız kulüp ve kurumlar</h2>
+              <p className="section-subtitle">Seçili iş ortaklarımızdan örnekler.</p>
+            </div>
+          </div>
+          <div className="grid grid-4 mt-4">
+            <article className="card ref-card">
+              <div className="ref-logo">KA</div>
+              <h3 className="ref-name">Kulüp Alpha</h3>
+            </article>
+            <article className="card ref-card">
+              <div className="ref-logo">KB</div>
+              <h3 className="ref-name">Kulüp Beta</h3>
+            </article>
+            <article className="card ref-card">
+              <div className="ref-logo">GC</div>
+              <h3 className="ref-name">Gençlik Spor</h3>
+            </article>
+            <article className="card ref-card">
+              <div className="ref-logo">TA</div>
+              <h3 className="ref-name">Takım Atlas</h3>
+            </article>
           </div>
         </div>
       </section>
@@ -314,11 +345,11 @@ export default function Home() {
                 <div className="contact-list">
                   <div className="contact-item">
                     <div className="contact-ico"><svg className="ico" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" ry="2" fill="none" stroke="currentColor" strokeWidth="2"></rect><path d="M3 7l9 6 9-6" fill="none" stroke="currentColor" strokeWidth="2"></path></svg></div>
-                    <div className="contact-text"><strong>E-posta</strong><div><a className="link" href="mailto:info@spormanage.com">info@spormanage.com</a></div></div>
+                    <div className="contact-text"><strong>E-posta</strong><div><a className="link" href="mailto:info@spormanage.com.tr">info@spormanage.com.tr</a></div></div>
                   </div>
                   <div className="contact-item">
                     <div className="contact-ico"><svg className="ico" viewBox="0 0 24 24"><path d="M8 16l8-8" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"></path><path d="M10 14l-3 3 a4 4 0 0 1-6-6l3-3" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"></path><path d="M14 10l3-3a4 4 0 0 1 6 6l-3 3" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"></path></svg></div>
-                    <div className="contact-text"><strong>Web</strong><div><a className="link" href="https://spormanage.com" target="_blank">spormanage.com</a></div></div>
+                    <div className="contact-text"><strong>Web</strong><div><a className="link" href="https://spormanage.com" target="_blank">spormanage.com.tr</a></div></div>
                   </div>
                   <div className="contact-item">
                     <div className="contact-ico"><svg className="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" strokeWidth="2"></circle><path d="M8 12h8" stroke="currentColor" strokeWidth="2"></path><path d="M12 8v8" stroke="currentColor" strokeWidth="2"></path></svg></div>
