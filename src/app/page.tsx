@@ -94,7 +94,7 @@ export default function Home() {
       <header className="site-header">
         <div className="container header-inner">
           <a className="brand" href="#">
-            <Image className="logo" src="/assets/img/spormanage-logo.png" alt="Spormanage" width={170} height={48} priority/>
+            <Image className="logo" src="/spormanage-logo.png" alt="Spormanage" width={170} height={48} priority/>
           </a>
           <nav className={`main-nav ${navOpen ? "open" : ""}`} aria-label="Ana menü">
             <a href="#services">Hizmetler</a>
@@ -364,7 +364,7 @@ export default function Home() {
 
       <footer className="site-footer">
         <div className="container footer-bottom">
-          <div><Image className="logo" src="/assets/img/spormanage-logo.png" alt="Spormanage" width={170} height={48} /></div>
+          <div><Image className="logo" src="/spormanage-logo.png" alt="Spormanage" width={170} height={48} /></div>
           <div className="muted">Tüm hakları saklıdır.</div>
         </div>
       </footer>
