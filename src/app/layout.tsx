@@ -13,6 +13,11 @@ const urbanist = Urbanist({
 export const metadata: Metadata = {
   title: "Spormanage – Web Tabanlı Spor Yönetim Platformu",
   description: "Spormanage ile spor kulübünüzün üyelerini, finansını ve antrenmanlarını tek panelden yönetin.",
+  icons: {
+    icon: "/logo.png",
+    shortcut: "/logo.png",
+    apple: "/logo.png",
+  },
 };
 
 export default function RootLayout({
