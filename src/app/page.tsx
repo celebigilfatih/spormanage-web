@@ -182,35 +182,7 @@ export default function Home() {
         </div>
       </section>
       
-      <section className="section references" id="references">
-        <div className="container">
-          <div className="row justify-content-center align-items-center">
-            <div className="col-12 text-center">
-              <div className="crumb"><span className="dot">⬤</span> Referanslar</div>
-              <h2 className="section-title">Birlikte çalıştığımız kulüp ve kurumlar</h2>
-              <p className="section-subtitle">Seçili iş ortaklarımızdan örnekler.</p>
-            </div>
-          </div>
-          <div className="grid grid-4 mt-4">
-            <article className="card ref-card">
-              <div className="ref-logo">KA</div>
-              <h3 className="ref-name">Kulüp Alpha</h3>
-            </article>
-            <article className="card ref-card">
-              <div className="ref-logo">KB</div>
-              <h3 className="ref-name">Kulüp Beta</h3>
-            </article>
-            <article className="card ref-card">
-              <div className="ref-logo">GC</div>
-              <h3 className="ref-name">Gençlik Spor</h3>
-            </article>
-            <article className="card ref-card">
-              <div className="ref-logo">TA</div>
-              <h3 className="ref-name">Takım Atlas</h3>
-            </article>
-          </div>
-        </div>
-      </section>
+      
 
       <section className="section services" id="services">
         <div className="container">
@@ -332,6 +304,31 @@ export default function Home() {
 
       
 
+      <section className="section references" id="references">
+        <div className="container">
+          <div className="row justify-content-center align-items-center">
+            <div className="col-12 text-center">
+              <div className="crumb"><span className="dot">⬤</span> Referanslar</div>
+              <h2 className="section-title">Birlikte çalıştığımız kulüp ve kurumlar</h2>
+              <p className="section-subtitle">Seçili iş ortaklarımızdan örnekler.</p>
+            </div>
+          </div>
+          <div className="grid grid-4 mt-4">
+            <article className="card ref-card">
+              <div className="ref-logo">ÖS</div>
+              <h3 className="ref-name">Özlüce Spor</h3>
+            </article>
+            <article className="card ref-card">
+              <div className="ref-logo">KS</div>
+              <h3 className="ref-name">Kültür Spor</h3>
+            </article>
+            <article className="card ref-card">
+              <div className="ref-logo">YK</div>
+              <h3 className="ref-name">Yeni Karaman</h3>
+            </article>
+          </div>
+        </div>
+      </section>
       <section className="section contact" id="contact-inline">
         <div className="container">
           <div className="row justify-content-center align-items-center">
