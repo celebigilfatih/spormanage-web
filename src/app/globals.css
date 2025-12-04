@@ -159,6 +159,7 @@ body.page-leave { opacity: 0; }
 .grid-4 { grid-template-columns: repeat(4, 1fr); }
 
 .references { background: var(--bg); border-bottom: 1px solid var(--border); }
+.references .grid { justify-items: center; }
 .ref-card { text-align: center; }
 .ref-logo { width: 64px; height: 64px; border-radius: 999px; display: grid; place-items: center; background: rgba(255,255,255,.06); border: 1px solid var(--border); color: var(--accent-2); margin: 0 auto; font-weight: 800; }
 .ref-name { margin-top: 10px; font-size: 16px; color: #fff; }

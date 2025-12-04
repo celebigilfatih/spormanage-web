@@ -313,7 +313,7 @@ export default function Home() {
               <p className="section-subtitle">Seçili iş ortaklarımızdan örnekler.</p>
             </div>
           </div>
-          <div className="grid grid-4 mt-4">
+          <div className="grid grid-3 mt-4">
             <article className="card ref-card">
               <div className="ref-logo">ÖS</div>
               <h3 className="ref-name">Özlüce Spor</h3>
